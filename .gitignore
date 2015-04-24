@@ -12,9 +12,9 @@
 hs_err_pid*
 
 # eclipse
-*/.project
-*/.settings
-*/.classpath
+*.project
+*.settings
+*.classpath
 
 # mac
 .DS_Store
