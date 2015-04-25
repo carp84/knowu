@@ -3,7 +3,7 @@
  */
 package knowu.persistence.dataobject;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +15,8 @@ import lombok.Setter;
 @Setter
 public class BaseDO {
 
-  private Date gmtCreated;
-  private Date gmtModified;
+  private Timestamp gmtCreated;
+  private Timestamp gmtModified;
   private Integer version;
 
 }
