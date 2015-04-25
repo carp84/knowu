@@ -11,7 +11,6 @@
        http://www.springframework.org/schema/context/spring-context-2.5.xsd"
   default-autowire="byName" default-lazy-init="true"
   default-init-method="init">
-  <context:annotation-config />
   <context:component-scan base-package="knowu.controller" />
   <bean
     class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -22,5 +21,4 @@
       </list>
     </property>
   </bean>
-  <bean id="coreController" class="knowu.controller.CoreController" />
 </beans>
