@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowu.persistence.mapper.UserInfoMapper">
+  <insert id="insert">
+  <![CDATA[
+    insert into 
+    user_info(user_id, password, email_address, gender, 
+    home_address, home_address_location, work_address, work_address_location, 
+    birthday, job_description, mobile, specific_name, user_type, other_description, 
+    thumbnail, first_log_in_date, pet_type, gmt_created, gmt_modified, version) 
+    values(#{userId}, #{password}, #{emailAddress}, #{gender}, #{homeAddress}, 
+    #{homeAddressLocation}, #{workAddress}, #{workAddressLocation}, #{birthday}, 
+    #{jobDescription}, #{mobile}, #{specificName}, #{userType}, #{otherDescription}, 
+    #{thumbnail}, #{firstLogInDate}, #{petType}, now(), now(), 1)
+  ]]>
+  </insert>
+  <select id="select" resultType="TraceDataDO">
+  <![CDATA[
+    select * from user_info where user_id = #{userId}
+  ]]>
+  </select>
+  <update id="update">
+  <![CDATA[
+    update user_info set password = #{password}, 
+    email_address = #{emailAddress}, gender = #{gender}, home_address = #{homeAddress}, 
+    home_address_location = #{homeAddressLocation}, work_address = #{workAddress}, 
+    work_address_location = #{workAddressLocation}, birthday = #{birthday}, 
+    job_description = #{jobDescription}, mobile = #{mobile}, specific_name = #{specificName}, 
+    user_type = #{userType}, other_description = #{otherDescription}, thumbnail = #{thumbnail}, 
+    first_log_in_date = #{firstLogInDate}, pet_type = #{petType}, gmt_modified = now(), 
+    version = version + 1
+    where user_id = #{userId} and version = #{version}
+  ]]>
+  </update>
+</mapper>

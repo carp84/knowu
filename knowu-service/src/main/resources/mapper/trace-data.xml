@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowu.persistence.mapper.TraceDataMapper">
+  <insert id="insert">
+  <![CDATA[
+    insert into 
+    trace_data(user_id, latitude, longitude, timestamp, address, action, 
+    other_description, day_of_week, gmt_created, gmt_modified, version) 
+    values(#{userId}, #{latitude}, #{longitude}, #{timestamp}, #{address}, 
+    #{action}, #{otherDescription}, #{dayOfWeek}, now(), now(), 1)
+  ]]>
+  </insert>
+  <select id="select" resultType="TraceDataDO">
+  <![CDATA[
+    select * from trace_data where user_id = #{userId}
+  ]]>
+  </select>
+  <update id="update">
+  <![CDATA[
+    update trace_data set latitude = #{latitude}, longitude = #{longitude}, 
+    timestamp = #{timestamp}, address = #{address}, action = #{action}, 
+    other_description = #{otherDescription}, day_of_week = #{dayOfWeek}, 
+    gmt_modify = now(), version = version + 1
+    where user_id = #{userId} and version = #{version}
+  ]]>
+  </update>
+</mapper>
