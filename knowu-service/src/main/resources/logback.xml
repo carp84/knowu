@@ -1,9 +1,9 @@
 <configuration>
   <appender name="file"
     class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <File>${catalina.home}/knowu.log</File>
+    <File>${catalina.home}/logs/knowu.log</File>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <FileNamePattern>${catalina.home}/knowu.%d{yyyy-MM-dd}.log.zip
+      <FileNamePattern>${catalina.home}/logs/knowu.%d{yyyy-MM-dd}.log.zip
       </FileNamePattern>
     </rollingPolicy>
     <layout class="ch.qos.logback.classic.PatternLayout">
