@@ -11,6 +11,8 @@
        http://www.springframework.org/schema/context/spring-context-2.5.xsd"
   default-autowire="byName" default-lazy-init="true"
   default-init-method="init">
+  <context:annotation-config />
+  <context:component-scan base-package="knowu.controller" />
   <bean
     class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
     <property name="messageConverters">
