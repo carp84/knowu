@@ -44,6 +44,12 @@
               <archive>
                 <addMavenDescriptor>false</addMavenDescriptor>
               </archive>
+              <webResources>
+                <resource>
+                  <directory>${project.parent.basedir}/knowu-service/src/main/resources</directory>
+                  <targetPath>WEB-INF</targetPath>
+                </resource>
+              </webResources>
               <outputDirectory>${project.parent.build.directory}</outputDirectory>
             </configuration>
           </execution>
