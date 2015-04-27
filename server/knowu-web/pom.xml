@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>knowu</groupId>
+    <artifactId>knowu-parent-pom</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>knowu-web</artifactId>
+  <packaging>war</packaging>
+  <name>knowu-web</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>knowu</groupId>
+      <artifactId>knowu-service</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>knowu</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>war</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <addMavenDescriptor>false</addMavenDescriptor>
+              </archive>
+              <webResources>
+                <resource>
+                  <directory>${project.parent.basedir}/knowu-service/src/main/resources</directory>
+                  <targetPath>WEB-INF</targetPath>
+                </resource>
+              </webResources>
+              <outputDirectory>${project.parent.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
