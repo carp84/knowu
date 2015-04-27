@@ -12,4 +12,6 @@ public interface UserService {
 
   BaseResult addUser(String userId, String password, String emailAddress);
 
+  BaseResult loginUser(String userId, String password);
+
 }

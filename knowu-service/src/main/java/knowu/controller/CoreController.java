@@ -29,4 +29,11 @@ public class CoreController {
     return userService.addUser(userId, password, emailAddress);
   }
 
+  @RequestMapping("login")
+  @ResponseBody
+  public BaseResult login(@RequestParam("userId") String userId,
+      @RequestParam("password") String password) {
+    return userService.loginUser(userId, password);
+  }
+
 }

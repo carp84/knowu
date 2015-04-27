@@ -46,4 +46,21 @@ public class UserServiceImpl implements UserService {
     }
     return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
   }
+
+  @Override
+  public BaseResult loginUser(String userId, String password) {
+    UserInfoDO userInfo = null;
+    try {
+      userInfo = userInfoDAO.select(userId);
+    } catch (Exception e) {
+      logger.error("database operation error", e);
+      return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
+    }
+    String passwd = userInfo.getPassword();
+    if (passwd.equals(password)) {
+      return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
+    } else {
+      return ResultUtils.buildBaseResult(ResultInfo.LOGIN_FAIL);
+    }
+  }
 }

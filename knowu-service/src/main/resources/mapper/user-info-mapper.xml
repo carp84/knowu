@@ -16,7 +16,7 @@
     #{thumbnail}, #{firstLogInDate}, #{petType}, now(), now(), 1)
   ]]>
   </insert>
-  <select id="select" resultType="TraceDataDO">
+  <select id="select" resultType="UserInfoDO">
   <![CDATA[
     select * from user_info where user_id = #{userId}
   ]]>
