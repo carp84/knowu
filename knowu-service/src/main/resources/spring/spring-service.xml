@@ -12,4 +12,5 @@
   default-autowire="byName" default-lazy-init="true"
   default-init-method="init">
   <bean id="userService" class="knowu.service.impl.UserServiceImpl" />
+  <bean id="traceService" class="knowu.service.impl.TraceServiceImpl" />
 </beans>
