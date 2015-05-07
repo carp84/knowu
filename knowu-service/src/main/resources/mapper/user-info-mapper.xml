@@ -31,7 +31,7 @@
     user_type = #{userType}, other_description = #{otherDescription}, thumbnail = #{thumbnail}, 
     first_log_in_date = #{firstLogInDate}, pet_type = #{petType}, gmt_modified = now(), 
     version = version + 1
-    where user_id = #{userId} and version = #{version}
+    where user_id = #{userId}
   ]]>
   </update>
 </mapper>

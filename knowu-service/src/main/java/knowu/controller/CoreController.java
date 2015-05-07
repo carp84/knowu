@@ -5,6 +5,7 @@ package knowu.controller;
 
 import knowu.api.result.BaseResult;
 import knowu.persistence.dataobject.TraceDataDO;
+import knowu.persistence.dataobject.UserInfoDO;
 import knowu.service.TraceService;
 import knowu.service.UserService;
 
@@ -41,6 +42,12 @@ public class CoreController {
   public BaseResult login(@RequestParam("userId") String userId,
       @RequestParam("password") String password) {
     return userService.loginUser(userId, password);
+  }
+
+  @RequestMapping(value = "/completeUserInfo", method = RequestMethod.POST)
+  @ResponseBody
+  public BaseResult completeUserInfo(@RequestBody UserInfoDO userInfo) {
+    return userService.complateUserInfo(userInfo);
   }
 
   @RequestMapping(value = "/uploadTrace", method = RequestMethod.POST)

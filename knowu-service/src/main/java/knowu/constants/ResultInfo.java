@@ -8,9 +8,11 @@ package knowu.constants;
  */
 public enum ResultInfo {
 
-  SUCCESS("200", "success"), INTERNAL_ERROR("500",
-      "request invoke failed due to some unkonwn reason"), LOGIN_FAIL("401",
-      "Wrong username/password");
+  SUCCESS("200", "success"),
+  SUCCESS_FIRSTLOGIN("200", "first login success"),
+  INTERNAL_ERROR("500", "request invoke failed due to some unkonwn reason"),
+  INCORRECT_PASSWORD("401","Incorrect password"),
+  LOGIN_FAIL("401", "Wrong username/password");
 
   public String code;
   public String message;

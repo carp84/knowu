@@ -3,6 +3,8 @@
  */
 package knowu.service.impl;
 
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ import knowu.utils.ResultUtils;
  */
 public class UserServiceImpl implements UserService {
 
-  private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+  private static final Logger logger = LoggerFactory
+      .getLogger(UserServiceImpl.class);
 
   @Autowired
   private UserInfoDAO userInfoDAO;
@@ -29,7 +32,8 @@ public class UserServiceImpl implements UserService {
    * @see knowu.service.UserService#addUser(java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
-  public BaseResult addUser(String userId, String password, String emailAddress) {
+  public BaseResult
+      addUser(String userId, String password, String emailAddress) {
     UserInfoDO userInfoDO = new UserInfoDO();
     userInfoDO.setUserId(userId);
     userInfoDO.setPassword(password);
@@ -58,9 +62,38 @@ public class UserServiceImpl implements UserService {
     }
     String passwd = userInfo.getPassword();
     if (passwd.equals(password)) {
-      return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
+      // check whether is first login
+      if (userInfo.getFirstLogInDate() == null) {
+        // don't set first login date until additional data uploaded
+        return ResultUtils.buildBaseResult(ResultInfo.SUCCESS_FIRSTLOGIN);
+      } else {
+        return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
+      }
     } else {
       return ResultUtils.buildBaseResult(ResultInfo.LOGIN_FAIL);
     }
+  }
+
+  @Override
+  public BaseResult complateUserInfo(UserInfoDO userInfoDO) {
+    // check password first to avoid malicious attack
+    UserInfoDO userInfoForChek = null;
+    try {
+      userInfoForChek = userInfoDAO.select(userInfoDO.getUserId());
+    } catch (Exception e) {
+      logger.error("database operation error", e);
+      return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
+    }
+    if (!userInfoForChek.getPassword().equals(userInfoDO.getPassword())) {
+      return ResultUtils.buildBaseResult(ResultInfo.INCORRECT_PASSWORD);
+    }
+    // check passed, begin update
+    try {
+      userInfoDAO.update(userInfoDO);
+    } catch (Exception e) {
+      logger.error("database operation error", e);
+      return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
+    }
+    return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
   }
 }
