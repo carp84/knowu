@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
       userInfoDAO.insert(userInfoDO);
     } catch (Exception e) {
       logger.error("database operation error", e);
-      return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
+      return ResultUtils.buildBaseResult(ResultInfo.DATABASE_ERROR);
     }
     return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
   }
@@ -75,24 +75,35 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public BaseResult complateUserInfo(UserInfoDO userInfoDO) {
+  public BaseResult completeUserInfo(UserInfoDO userInfoDO) {
     // check password first to avoid malicious attack
     UserInfoDO userInfoForChek = null;
+    String userId = userInfoDO.getUserId();
+    if (userId == null) {
+      logger.error("Passed userId is NULL");
+      return ResultUtils.buildBaseResult(ResultInfo.EMPTY_USERID);
+    }
+    logger.debug("Checking password of userId [" + userId + "]");
     try {
       userInfoForChek = userInfoDAO.select(userInfoDO.getUserId());
     } catch (Exception e) {
       logger.error("database operation error", e);
+      return ResultUtils.buildBaseResult(ResultInfo.DATABASE_ERROR);
+    }
+    String password = userInfoForChek.getPassword();
+    if (password == null) {
+      logger.error("Recorded passwod for userId [" + userId + "] is NULL");
       return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
     }
-    if (!userInfoForChek.getPassword().equals(userInfoDO.getPassword())) {
+    if (!password.equals(userInfoDO.getPassword())) {
       return ResultUtils.buildBaseResult(ResultInfo.INCORRECT_PASSWORD);
     }
     // check passed, begin update
     try {
-      userInfoDAO.update(userInfoDO);
+      userInfoDAO.completeUserInfo(userInfoDO);
     } catch (Exception e) {
       logger.error("database operation error", e);
-      return ResultUtils.buildBaseResult(ResultInfo.INTERNAL_ERROR);
+      return ResultUtils.buildBaseResult(ResultInfo.DATABASE_ERROR);
     }
     return ResultUtils.buildBaseResult(ResultInfo.SUCCESS);
   }

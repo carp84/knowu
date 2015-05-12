@@ -11,7 +11,9 @@ public enum ResultInfo {
   SUCCESS("200", "success"),
   SUCCESS_FIRSTLOGIN("200", "first login success"),
   INTERNAL_ERROR("500", "request invoke failed due to some unkonwn reason"),
-  INCORRECT_PASSWORD("401","Incorrect password"),
+  DATABASE_ERROR("500", "request invoke failed due to database exception"),
+  INCORRECT_PASSWORD("401", "Incorrect password"),
+  EMPTY_USERID("400", "Passed userId is NULL"),
   LOGIN_FAIL("401", "Wrong username/password");
 
   public String code;

@@ -34,4 +34,14 @@
     where user_id = #{userId}
   ]]>
   </update>
+  <update id="completeUserInfo">
+  <![CDATA[
+    update user_info set gender = #{gender}, home_address = #{homeAddress},
+    home_address_location = #{homeAddressLocation}, work_address = #{workAddress},
+    work_address_location = #{workAddressLocation}, birthday = #{birthday},
+    job_description = #{jobDescription}, mobile = #{mobile}, gmt_modified = now(),
+    version = version + 1
+    where user_id = #{userId}
+  ]]>
+  </update>
 </mapper>

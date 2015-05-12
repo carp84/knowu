@@ -15,6 +15,6 @@ public interface UserService {
 
   BaseResult loginUser(String userId, String password);
 
-  BaseResult complateUserInfo(UserInfoDO userInfo);
+  BaseResult completeUserInfo(UserInfoDO userInfo);
 
 }

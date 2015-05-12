@@ -16,4 +16,6 @@ public interface UserInfoDAO {
 
   void update(UserInfoDO userInfoDO);
 
+  void completeUserInfo(UserInfoDO userInfoDO);
+
 }

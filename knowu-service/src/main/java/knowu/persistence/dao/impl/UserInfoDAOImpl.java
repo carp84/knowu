@@ -46,4 +46,9 @@ public class UserInfoDAOImpl implements UserInfoDAO {
     sqlSession.update("knowu.persistence.mapper.UserInfoMapper.update", userInfoDO);
   }
 
+  @Override
+  public void completeUserInfo(UserInfoDO userInfoDO) {
+    sqlSession.update("knowu.persistence.mapper.UserInfoMapper.completeUserInfo", userInfoDO);
+  }
+
 }

@@ -47,7 +47,7 @@ public class CoreController {
   @RequestMapping(value = "/completeUserInfo", method = RequestMethod.POST)
   @ResponseBody
   public BaseResult completeUserInfo(@RequestBody UserInfoDO userInfo) {
-    return userService.complateUserInfo(userInfo);
+    return userService.completeUserInfo(userInfo);
   }
 
   @RequestMapping(value = "/uploadTrace", method = RequestMethod.POST)
