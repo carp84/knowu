@@ -4,6 +4,7 @@
 package knowu.controller;
 
 import knowu.api.result.BaseResult;
+import knowu.api.result.PlainResult;
 import knowu.persistence.dataobject.TraceDataDO;
 import knowu.persistence.dataobject.UserInfoDO;
 import knowu.service.TraceService;
@@ -48,6 +49,18 @@ public class CoreController {
   @ResponseBody
   public BaseResult completeUserInfo(@RequestBody UserInfoDO userInfo) {
     return userService.completeUserInfo(userInfo);
+  }
+  
+  @RequestMapping(value = "/getLoginDays", method = RequestMethod.GET)
+  @ResponseBody
+  public PlainResult<Integer> getLoginDays(@RequestParam("userId") String userId) {
+    return userService.getLoginDays(userId);
+  }
+
+  @RequestMapping(value = "/getPetType", method = RequestMethod.GET)
+  @ResponseBody
+  public PlainResult<Integer> getPetType(@RequestParam("userId") String userId) {
+    return userService.getPetType(userId);
   }
 
   @RequestMapping(value = "/uploadTrace", method = RequestMethod.POST)

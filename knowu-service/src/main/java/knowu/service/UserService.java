@@ -4,6 +4,7 @@
 package knowu.service;
 
 import knowu.api.result.BaseResult;
+import knowu.api.result.PlainResult;
 import knowu.persistence.dataobject.UserInfoDO;
 
 /**
@@ -16,5 +17,9 @@ public interface UserService {
   BaseResult loginUser(String userId, String password);
 
   BaseResult completeUserInfo(UserInfoDO userInfo);
+
+  PlainResult<Integer> getLoginDays(String userId);
+
+  PlainResult<Integer> getPetType(String userId);
 
 }

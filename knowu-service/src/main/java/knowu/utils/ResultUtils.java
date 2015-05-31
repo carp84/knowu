@@ -40,12 +40,20 @@ public class ResultUtils {
     }
   }
 
-  public static BaseResult buildBaseResult(String code, String message, boolean success) {
+  public static BaseResult buildBaseResult(String code, String message,
+      boolean success) {
     BaseResult baseResult = newBaseResult();
     baseResult.setCode(code);
     baseResult.setMessage(message);
     baseResult.setSuccess(success);
     return baseResult;
+  }
+
+  public static <T> PlainResult<T> buildPlainResult(ResultInfo resultInfo,
+      T data) {
+    PlainResult<T> result = new PlainResult<T>(buildBaseResult(resultInfo));
+    result.setData(data);
+    return result;
   }
 
 }

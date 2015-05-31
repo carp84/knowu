@@ -3,6 +3,8 @@
  */
 package knowu.persistence.dao.impl;
 
+import java.sql.Date;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +51,18 @@ public class UserInfoDAOImpl implements UserInfoDAO {
   @Override
   public void completeUserInfo(UserInfoDO userInfoDO) {
     sqlSession.update("knowu.persistence.mapper.UserInfoMapper.completeUserInfo", userInfoDO);
+  }
+
+  @Override
+  public Integer getPetType(String userId) {
+    return sqlSession.selectOne(
+      "knowu.persistence.mapper.UserInfoMapper.selectPetType", userId);
+  }
+
+  @Override
+  public Date getFirstLoginDate(String userId) {
+    return sqlSession.selectOne(
+      "knowu.persistence.mapper.UserInfoMapper.selectFirstLoginDate", userId);
   }
 
 }

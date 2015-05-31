@@ -3,6 +3,8 @@
  */
 package knowu.persistence.dao;
 
+import java.sql.Date;
+
 import knowu.persistence.dataobject.UserInfoDO;
 
 /**
@@ -17,5 +19,9 @@ public interface UserInfoDAO {
   void update(UserInfoDO userInfoDO);
 
   void completeUserInfo(UserInfoDO userInfoDO);
+
+  Integer getPetType(String userId);
+
+  Date getFirstLoginDate(String userId);
 
 }

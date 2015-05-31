@@ -21,6 +21,16 @@
     select * from user_info where user_id = #{userId}
   ]]>
   </select>
+  <select id="selectPetType" resultType="Integer">
+  <![CDATA[
+    select pet_type from user_info where user_id = #{userId}
+  ]]>
+  </select>
+  <select id="selectFirstLoginDate" resultType="java.sql.Date">
+  <![CDATA[
+    select first_log_in_date from user_info where user_id = #{userId}
+  ]]>
+  </select>
   <update id="update">
   <![CDATA[
     update user_info set password = #{password}, 
@@ -39,7 +49,9 @@
     update user_info set gender = #{gender}, home_address = #{homeAddress},
     home_address_location = #{homeAddressLocation}, work_address = #{workAddress},
     work_address_location = #{workAddressLocation}, birthday = #{birthday},
-    job_description = #{jobDescription}, mobile = #{mobile}, gmt_modified = now(),
+    job_description = #{jobDescription}, mobile = #{mobile}, specific_name = #{specificName},
+    user_type = #{userType}, other_description = #{otherDescription}, thumbnail = #{thumbnail},
+    first_log_in_date = #{firstLogInDate}, pet_type = #{petType}, gmt_modified = now(),
     version = version + 1
     where user_id = #{userId}
   ]]>

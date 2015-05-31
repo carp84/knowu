@@ -13,5 +13,7 @@
       alias="UserInfoDO" />
     <typeAlias type="knowu.persistence.dataobject.TraceDataDO"
       alias="TraceDataDO" />
+    <typeAlias type="java.lang.Integer"
+      alias="Integer" />
   </typeAliases>
 </configuration>
