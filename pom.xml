@@ -26,6 +26,8 @@
     <fastjson.version>1.2.5</fastjson.version>
     <mysql.version>5.1.35</mysql.version>
     <junit.version>4.12</junit.version>
+    <commons-codec.version>1.4</commons-codec.version>
+    <json-lib.version>2.4</json-lib.version>
   </properties>
 
   <dependencyManagement>
@@ -147,6 +149,19 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+      </dependency>
+      <!-- commons-codec -->
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
+      </dependency>
+      <!-- json-lib -->
+      <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>${json-lib.version}</version>
+        <classifier>jdk15</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>
