@@ -31,18 +31,16 @@ public class CoreController {
   @Autowired
   private TraceService traceService;
 
-  @RequestMapping("/registerUser")
+  @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
   @ResponseBody
-  public BaseResult registerUser(@RequestParam("userId") String userId,
-      @RequestParam("password") String password, @RequestParam("emailAddress") String emailAddress) {
-    return userService.addUser(userId, password, emailAddress);
+  public BaseResult registerUser(@RequestBody UserInfoDO userInfo) {
+    return userService.addUser(userInfo);
   }
 
-  @RequestMapping("/login")
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
-  public BaseResult login(@RequestParam("userId") String userId,
-      @RequestParam("password") String password) {
-    return userService.loginUser(userId, password);
+  public BaseResult login(@RequestBody UserInfoDO userInfo) {
+    return userService.loginUser(userInfo);
   }
 
   @RequestMapping(value = "/completeUserInfo", method = RequestMethod.POST)

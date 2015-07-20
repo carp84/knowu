@@ -34,13 +34,8 @@ public class UserServiceImpl implements UserService {
    * @see knowu.service.UserService#addUser(java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
-  public BaseResult
-      addUser(String userId, String password, String emailAddress) {
-    UserInfoDO userInfoDO = new UserInfoDO();
-    userInfoDO.setUserId(userId);
-    userInfoDO.setPassword(password);
-    userInfoDO.setEmailAddress(emailAddress);
-    return doAddUser(userInfoDO);
+  public BaseResult addUser(UserInfoDO userInfo) {
+    return doAddUser(userInfo);
   }
 
   private BaseResult doAddUser(UserInfoDO userInfoDO) {
@@ -65,18 +60,18 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public BaseResult loginUser(String userId, String password) {
-    UserInfoDO userInfo = null;
+  public BaseResult loginUser(UserInfoDO userInfo) {
+    UserInfoDO userInfoForCheck = null;
     try {
-      userInfo = userInfoDAO.select(userId);
+      userInfoForCheck = userInfoDAO.select(userInfo.getUserId());
     } catch (Exception e) {
       logger.error("database operation error", e);
       return ResultUtils.buildBaseResult(ResultInfo.DATABASE_ERROR);
     }
-    String passwd = userInfo.getPassword();
-    if (passwd.equals(password)) {
+    String passwd = userInfoForCheck.getPassword();
+    if (passwd.equals(userInfo.getPassword())) {
       // check whether is first login
-      if (userInfo.getFirstLogInDate() == null) {
+      if (userInfoForCheck.getFirstLogInDate() == null) {
         // don't set first login date until additional data uploaded
         return ResultUtils.buildBaseResult(ResultInfo.SUCCESS_FIRSTLOGIN);
       } else {
