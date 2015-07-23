@@ -12,9 +12,9 @@ import knowu.persistence.dataobject.UserInfoDO;
  */
 public interface UserService {
 
-  BaseResult addUser(UserInfoDO userInfo);
+  BaseResult addUser(String userId, String password, String emailAddress);
 
-  BaseResult loginUser(UserInfoDO userInfo);
+  BaseResult loginUser(String userId, String password);
 
   BaseResult completeUserInfo(UserInfoDO userInfo);
 
